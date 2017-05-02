@@ -1,0 +1,40 @@
+<assembly>
+	<id>bin</id>
+	<formats>
+		<format>tar.gz</format>
+	</formats>
+	<dependencySets>
+		<dependencySet>
+			<useProjectArtifact>true</useProjectArtifact>
+			<outputDirectory>lib</outputDirectory>
+		</dependencySet>
+	</dependencySets>
+	<fileSets>
+		<!-- scripts -->
+		<fileSet>
+			<directory>src/main/scripts</directory>
+			<outputDirectory>/bin</outputDirectory>
+			<fileMode>0755</fileMode>
+			<directoryMode>0755</directoryMode>
+			<includes>
+				<include>*.sh</include>
+			</includes>
+		</fileSet>
+		<!-- config -->
+		<fileSet>
+			<directory>src/main/resources</directory>
+			<outputDirectory>/conf</outputDirectory>
+			<includes>
+				<include>*.properties</include>
+				<include>*.xml</include>
+			</includes>
+		</fileSet>
+		<!-- web -->
+		<fileSet>
+			<directory>webapp</directory>
+			<outputDirectory>/bin/webapp</outputDirectory>
+			<fileMode>0755</fileMode>
+			<directoryMode>0755</directoryMode>
+		</fileSet>
+	</fileSets>
+</assembly>

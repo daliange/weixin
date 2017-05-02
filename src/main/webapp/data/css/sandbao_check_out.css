@@ -1,0 +1,122 @@
+@import url("login.css");
+/*Reset start*/
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, em, img, small, strong, b, i, dl, dt, dd, ol, ul, li, form, label,  table, tbody, tfoot, thead, tr, th, td ,input{border:none;margin: 0; padding: 0;list-style-type:none;vertical-align: baseline;text-indent:}
+html body{width:100%;height:100%;}
+html,body{width: 100% !important;height: 100% !important;}
+body{font-family: "Microsoft Yahei", "Helvetica Neue", Helvetica, Arial, sans-serif;font-size: 14px;
+/*margin-bottom:72px;*/}
+*{ -webkit-user-select:none; -webkit-tap-highlight-color:rgba(255, 255, 255, 0);}
+/* 菜单的响应式 CSS*/
+@media screen and (max-width: 600px) {#pcmenu { display: none; }#movmenu { display: block; }}
+.body-bg{background:#f2ece7;background-size:cover;min-height:500px;}
+a{text-decoration:none;}
+img{border:none;}
+header,footer,aside,nav,article,section{display: block;}
+input,textarea{outline:none;}
+input{ -webkit-user-select:text;}
+textarea{-webkit-user-select:text;}
+h3{font-size: 18px;}
+.clear{clear:both;}
+.center{ text-align:center;}
+.size-s{ font-size:0.8em;}
+.size-m{ font-size:1.2em;}
+.size-xl{ font-size:1.5em;}
+.size-xxl{ font-size:2em;}
+.size-xxxl{ font-size:2.5em;}
+.size-xxxxl{ font-size:3em;}
+.c_333{color:#333333;}
+.c_999{color:#999999;}
+.fl_left{ float:left;}
+.fl_right{ float:right;}
+.pos_fixed{ position:fixed;}
+.pos_relative{ position:relative;}
+.pos_absolute{ position:absolute;}
+.t_r{top:5px;right:5px;}
+.pad_lr_5{ padding:0em 1em;}
+.pad_lr_10{ padding:0em 5em;}
+.mar_tb_10{ margin:1em 0em;}
+.mar_top_10{ margin-top:1em;}
+.mar_top_120{ margin-top:12em;}
+.mar_lef_10{ margin-left:1em;}
+.mar_lef_45{ margin-left:4.5em;}
+.mar_lef_50{ margin-left:5em;}
+.height_whole{ height:100%;}
+
+.c_333{color:#333;}
+
+.w_wrap_pre{word-wrap: break-word;}
+
+.d_b1{z-index:0; width:100%; height:100%;}
+.d_f1{z-index:1;background-color:#333; opacity:0.5; width:100%; height:100%;}
+
+.input{display: block;width: 100%;box-sizing:border-box;height: 32px;}
+/*button start*/
+.s_btn{margin: 0.8em 0.6em;height: 40px;text-align: center;color: #fff;font-size: 1.2em;-moz-border-radius: 2px;/* Gecko browsers */  -webkit-border-radius: 2px;/* Webkit browsers */ border-radius:2px;/* W3C syntax */}
+.submit-btn{ width:100%;height: 40px;text-align: center;color: #fff;font:normal 1.2em/40px "Microsoft Yahei";background-color: #e07606;}
+
+/*button end*/
+/*global nav start*/
+.global-nav{height: 44px;line-height: 44px;position: relative;background-color:#f88b39;}
+.global-navb{width:100%;background-color:#FFF;border-top:1px solid #e8e8e8;overflow:hidden;}
+.global-navb li{font:normal 14px "Microsoft Yahei";color:#999999;display:block;border-bottom:1px solid #e8e8e8;padding:0.8em 1.2em 0.8em 0em;margin-left:0.8em;overflow:hidden;}
+
+/*.pri-cell{ width:22%; padding:0; white-space:nowrap;}*/
+.cell_per10{width:10%; padding:0; white-space:nowrap;}
+.cell_per20{width:20%; padding:0; white-space:nowrap;}
+.cell_per25{width:25%; padding:0; white-space:nowrap;}
+.cell_per30{width:30%; padding:0; white-space:nowrap;}
+.cell_per60{width:60%; padding:0; white-space:pre-wrap;}
+.cell_per65{width:65%; padding:0; }
+.cell_per70{width:70%; padding:0; white-space:pre-wrap;}
+.cell_per75{width:75%; padding:0; white-space:pre-wrap;}
+.cell_per75{width:80%; padding:0; white-space:pre-wrap;}
+
+.more_sel{ background:url(../images/more_sel.png) no-repeat center 10px / 20px 12px; width:20px; height:22px;}
+
+.btn_ver_pay{ text-align:left; font-size:12px;border:1px solid #f88b39;color:#f88b39; min-width:5em; background:transparent;padding:3px 6px;-moz-border-radius: 2px;/* Gecko browsers */ -webkit-border-radius: 2px;   /* Webkit browsers */ border-radius:2px;/* W3C syntax */}
+
+.jy_success{ width:45%; height:55px; margin:30px auto;padding-top:15px; padding-left:65px; background:url(../images/jy_success.png) no-repeat left center / 52px 48px;}
+.jy_failure{width:38%; height:55px; margin:30px auto;padding-top:15px; padding-left:65px; background:url(../images/jy_failure.png) no-repeat left center / 52px 48px;}
+
+.loading{width:120px; height:20px;top:-50%;left:50%; margin-top:90px;margin-left:-60px;background: url(../images/ico_load.png) no-repeat center center / 120px 120px;padding-top:160px;color:#f27e04;}
+
+.global-back{position: absolute;left: 0;top: 0;height: 440px;line-height: 44px;width: 44px;cursor: pointer;background:url(../images/ico-back.png) no-repeat 10px 10px;background-size: 20px 20px;}
+.global-back:hover{background:url(../images/ico-back.png) no-repeat 10px 10px;background-size: 20px 20px;cursor:pointer;}
+
+.global-title{color: #ffffff;font:normal 1.3em/2.2em "Microsoft Yahei";text-align: center;padding: 0 46px;}
+
+.mode_payment{/*color:#f88b39; margin-top:0.5em;*/}
+.font_attached{font:normal 12px 'Microsoft Yahei';color:#b2b2b2;}
+.trans_amount{color:#f88b39; margin-top:0.5em; float:right;}
+
+.code_l{float:right; right:15px;margin:2px 0 0 0;}
+
+/***pop***/
+.p_bg{ background-color:#FFF; z-index:2; width:100%; bottom:0;}
+.p_head{height:44px; text-align:center; line-height:44px; font-size:1.2em; border-bottom:1px solid #e8e8e8;}
+.p_close{padding:0 15px;color:#999; font-size:0.9em;left:0;}
+.p_ul{margin-left:5px;height:110px; overflow-y:scroll;}
+.p_ul li{ border-bottom:1px solid #e8e8e8; padding:10px 10px 10px 80px; }
+.s_ty_logo{ background:url(../images/sandbao_ty.png) no-repeat 5px center / 60px 45px;}
+.s_cy_logo{ background:url(../images/sandbao_cy.png) no-repeat 5px center / 60px 45px;}
+.s_card_logo{ background:url(../images/sandbao_card.png) no-repeat 5px center / 60px 45px;}
+
+/***load***/
+.login-bg{ background-color:#f88b39;}
+.input{display: block;width: 100%;box-sizing:border-box;height: 32px; padding-left:50px;font:normal 1.2em/40px "Microsoft Yahei";color:#ccc;background:transparent; }
+.loadinbg{ height:40px;}
+.load-inp-line{height:1px; background-color:#f2ece7; /*margin-bottom:10px;*/}
+.load-input{background-color:#fff;/*height:106px;*/margin:0px 0.8em;padding:0px;color:#fff;-moz-border-radius: 2px;/* Gecko browsers */-webkit-border-radius: 2px;   /* Webkit browsers */ border-radius:2px;/* W3C syntax */}
+.login-head-logo{ margin:0.5em auto 0em auto;height:62px; width:128px; background:url(../images/sandbao_logo.png) no-repeat center bottom / 128px 62px;margin-bottom:1em;}
+.genus{ width:130px; height:40px; left:50%; margin-left:-65px;color:#f88b39; position:absolute; bottom:0;}
+
+.c_validate{float:right;margin:-27px 5px 0 0;}
+.c_pic{float:right;margin:-20px 5px 0 0;}
+
+.ico_user{ background:url(../images/ico_user.png) no-repeat 10px center / 24px 24px;}
+.ico_key{ background:url(../images/ico_key.png) no-repeat 10px center / 24px 24px;}
+.ico_code{ background:url(../images/ico_code.png) no-repeat 10px center / 24px 24px;}
+
+/***error detail***/
+.error_details{color:#f1323f;opacity:0.92;width:100%; position:absolute; font-size:13px;}
+.e_pos{padding:5px 10px;margin:10px;background-color:#faedee;  border:1px solid #f29ca1; padding-right:30px; box-shadow: 1px 1px 3px #888888;}
