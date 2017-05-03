@@ -34,7 +34,7 @@ function upweixincode(){
 	console.log("location.search="+location.search);
 	$.ajax({
 	     type: 'GET',
-	     url:  '../weixintoken.do'+location.search ,
+	     url:  'weixintoken.do'+location.search ,
 	     success:function(){
 	    	 
 	     }

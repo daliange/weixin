@@ -30,6 +30,7 @@ import com.sand.weixin.util.HttpUtils;
 import cn.com.sandpay.cashier.sdk.SandpayClient;
 import cn.com.sandpay.cashier.sdk.SandpayRequestHead;
 import cn.com.sandpay.cashier.sdk.SandpayResponseHead;
+import cn.com.sandpay.cashier.sdk.util.CertUtil;
 import cn.com.sandpay.cashier.sdk.util.DateUtil;
 
 
@@ -137,6 +138,13 @@ public class PayController {
 		/**调用支付网关公众号下单方法**/
 		
 
+		// 加载证书
+		try {
+			CertUtil.init("classpath:sand-test.cer", "classpath:mid-test.pfx", "123456");
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		// 组后台报文
 		SandpayRequestHead head = new SandpayRequestHead();
@@ -149,12 +157,12 @@ public class PayController {
 		head.setVersion("1.0");
 		head.setMethod("sandpay.trade.pay");
 		head.setAccessType("1");
-		head.setMid("18349995");
+		head.setMid("100211701160001");
 		head.setChannelType("07");
 		head.setReqTime(DateUtil.getCurrentDate14());
 		
 		body.setOrderCode(DateUtil.getCurrentDate14());
-		body.setTotalAmount("000000000100");
+		body.setTotalAmount("000000000001");
 		body.setSubject("话费充值");
 		body.setBody("用户购买话费0.01");
 		//body.setTxnTimeOut("");
@@ -166,16 +174,18 @@ public class PayController {
 		//支付宝
 		head.setProductId("00000006");
 		body.setPayMode("sand_alipay");
-		body.setPayExtra("{\"userId\":\"2088702100758491\"}");
+		body.setPayExtra("{\"userId\":\""+userId+"\"}");
 		
 		body.setClientIp("127.0.0.1");
 		body.setNotifyUrl("http://127.0.0.1/WebGateway/stateChangeServlet");
 		
+		
+		String credential ="";
 		try {
 			//外网测试
 			//GatewayOrderPayResponse gwPayResponse = SandpayClient.execute(gwOrderPayReq, "http://61.129.71.103:8003/gateway/api/order/pay");
 			//本地测试
-			GatewayOrderPayResponse gwPayResponse = SandpayClient.execute(gwOrderPayReq, "http://127.0.0.1:8080/pay-client/gateway/api/order/pay");
+			GatewayOrderPayResponse gwPayResponse = SandpayClient.execute(gwOrderPayReq, "https://cashier.sandpay.com.cn/gateway/api/order/pay");
 			//测试地址
 			//GatewayOrderPayResponse gwPayResponse = SandpayClient.execute(gwOrderPayReq, "http://172.28.250.242:8084/gateway/api/order/pay");
 			SandpayResponseHead respHead = gwPayResponse.getHead();
@@ -184,7 +194,7 @@ public class PayController {
 				logger.info("txn success.");
 				
 				GatewayOrderPayResponseBody respBody = gwPayResponse.getBody();
-				String credential = respBody.getCredential();
+				credential = respBody.getCredential();
 				logger.info("credential={}",credential);	
 				
 			} else {
@@ -194,11 +204,7 @@ public class PayController {
 			e.printStackTrace();
 		}
 	
-		
-		
-		
-		String orderno  = "2017042021001004490252554931";
-		return orderno;
+		return credential;
 	}
 	
 	

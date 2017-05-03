@@ -69,12 +69,13 @@ function order(){
         async : false,
         url: "order.do",
         data: {amt : $("#amount").val(),userId:userId},
-        success: function (orderno) {
-        	//alert(orderno);
+        success: function (credential) {
+        	alert(credential);
         	
-          var charge = {payMode: "ali_pub", params: {"tradeNO":"2017050321001004490276168317"}};
-        	
-        	
+          var charge = {"payMode": "ali_pub", "params": {"tradeNO":"2017050321001004490276745043"}};
+        //alert(charge);
+          //var a = {"tradeNO":"2017050321001004490276745043","payMode":"ali_pub"}
+        
   	      paymentjs.createPayment(charge, function(result, err) {
             console.log(result);
             console.log(err.msg);
