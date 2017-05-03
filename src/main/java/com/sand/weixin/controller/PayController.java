@@ -20,7 +20,17 @@ import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.request.AlipaySystemOauthTokenRequest;
 import com.alipay.api.response.AlipaySystemOauthTokenResponse;
+import com.sand.weixin.SandpayConstants;
+import com.sand.weixin.pojo.GatewayOrderPayRequest;
+import com.sand.weixin.pojo.GatewayOrderPayRequest.GatewayOrderPayRequestBody;
+import com.sand.weixin.pojo.GatewayOrderPayResponse;
+import com.sand.weixin.pojo.GatewayOrderPayResponse.GatewayOrderPayResponseBody;
 import com.sand.weixin.util.HttpUtils;
+
+import cn.com.sandpay.cashier.sdk.SandpayClient;
+import cn.com.sandpay.cashier.sdk.SandpayRequestHead;
+import cn.com.sandpay.cashier.sdk.SandpayResponseHead;
+import cn.com.sandpay.cashier.sdk.util.DateUtil;
 
 
 
@@ -121,8 +131,70 @@ public class PayController {
 	@ResponseBody
 	public String order(HttpServletRequest request,HttpServletResponse response) {
 		String amt=request.getParameter("amt");
+		String userId=request.getParameter("userId");
 		logger.info("amt="+amt);
+		logger.info("userId="+userId);
 		/**调用支付网关公众号下单方法**/
+		
+
+		
+		// 组后台报文
+		SandpayRequestHead head = new SandpayRequestHead();
+		GatewayOrderPayRequestBody body = new GatewayOrderPayRequestBody();
+		
+		GatewayOrderPayRequest gwOrderPayReq = new GatewayOrderPayRequest();
+		gwOrderPayReq.setHead(head);
+		gwOrderPayReq.setBody(body);
+		
+		head.setVersion("1.0");
+		head.setMethod("sandpay.trade.pay");
+		head.setAccessType("1");
+		head.setMid("18349995");
+		head.setChannelType("07");
+		head.setReqTime(DateUtil.getCurrentDate14());
+		
+		body.setOrderCode(DateUtil.getCurrentDate14());
+		body.setTotalAmount("000000000100");
+		body.setSubject("话费充值");
+		body.setBody("用户购买话费0.01");
+		//body.setTxnTimeOut("");
+		
+		//微信
+//		head.setProductId("00000005");
+//		body.setPayMode("sand_wx");
+//		body.setPayExtra("{\"subAppid\":\"wx94348ceda2791351\",\"userId\":\"oI3GMv9GE71n78RzCQcsp1RZIyZE\"}");
+		//支付宝
+		head.setProductId("00000006");
+		body.setPayMode("sand_alipay");
+		body.setPayExtra("{\"userId\":\"2088702100758491\"}");
+		
+		body.setClientIp("127.0.0.1");
+		body.setNotifyUrl("http://127.0.0.1/WebGateway/stateChangeServlet");
+		
+		try {
+			//外网测试
+			//GatewayOrderPayResponse gwPayResponse = SandpayClient.execute(gwOrderPayReq, "http://61.129.71.103:8003/gateway/api/order/pay");
+			//本地测试
+			GatewayOrderPayResponse gwPayResponse = SandpayClient.execute(gwOrderPayReq, "http://127.0.0.1:8080/pay-client/gateway/api/order/pay");
+			//测试地址
+			//GatewayOrderPayResponse gwPayResponse = SandpayClient.execute(gwOrderPayReq, "http://172.28.250.242:8084/gateway/api/order/pay");
+			SandpayResponseHead respHead = gwPayResponse.getHead();
+			
+			if(SandpayConstants.SUCCESS_RESP_CODE.equals(respHead.getRespCode())) {
+				logger.info("txn success.");
+				
+				GatewayOrderPayResponseBody respBody = gwPayResponse.getBody();
+				String credential = respBody.getCredential();
+				logger.info("credential={}",credential);	
+				
+			} else {
+				logger.error("txn fail respCode[{}],respMsg[{}].", respHead.getRespCode(), respHead.getRespMsg());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+		
 		
 		
 		String orderno  = "2017042021001004490252554931";

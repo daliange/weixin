@@ -32,7 +32,15 @@
 </div>
 
 <div class="clear s_btn"><input name="" class="submit-btn" type="button" value="去支付" onclick = "order()"></div>
+<div style="display: none" >
 
+	<%
+		String userId = (String)request.getAttribute("userId");
+	System.out.println("===" + userId);
+	
+	%> 
+	<p id="userId"><%=userId%></p>
+</div>
 
 <script src="/weixin/data/js/zepto.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="/weixin/data/js/base.js"></script>
@@ -47,52 +55,36 @@
 <!--调用下单方法，下单完成后，将trade_no传值给支付宝JS，起调支付宝收银台-->
 function order(){
 	
-	alert(111);
-    //alert("a="+a);
-	
-	//var charge = {"tradeNO":"2017050321001004490276168317","payMode":"ali_pub"};
-	
-    var charge = {payMode: "ali_pub", params: {"tradeNO":"2017050321001004490276168317"}};
-	
-	//var charge = {"payMode":"ali_pub","params":"{\"tradeNO\":\"2017050321001004490276168317\"}"};
+	//alert(111);
+	var userId = $("#userId").text();
+    //alert("userId="+userId);
+    
+    
 	
 	
-	      paymentjs.createPayment(charge, function(result, err) {
-          console.log(result);
-          console.log(err.msg);
-          console.log(err.extra);
-      }); 
+
 	
-/* 	$.ajax({
+ 	$.ajax({
         type: "post",
         async : false,
         url: "order.do",
-        data: {amt : $("#amount").val()},
+        data: {amt : $("#amount").val(),userId:userId},
         success: function (orderno) {
         	//alert(orderno);
         	
-        	<!---->
-      var charge = {
-        payMode: "ali_pub",
-        params: {"tradeNO":orderno}
-    };
-      paymentjs.createPayment(charge, function(result, err) {
-          console.log(result);
-          console.log(err.msg);
-          console.log(err.extra);
-      }); 
+          var charge = {payMode: "ali_pub", params: {"tradeNO":"2017050321001004490276168317"}};
         	
         	
-  AlipayJSBridge.call("tradePay",{
-    			tradeNO: orderno
-    			}, function(result){
-    				//alert(result);
-    			});  
-      
-      
+  	      paymentjs.createPayment(charge, function(result, err) {
+            console.log(result);
+            console.log(err.msg);
+            console.log(err.extra);
+        }); 
+        	
+        	
       
         }
-    }); */
+    }); 
 
 	
 }
