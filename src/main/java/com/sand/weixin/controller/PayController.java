@@ -112,7 +112,7 @@ public class PayController {
 		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("userId", userId);
-		mv.setViewName("/alipay/NewFile");
+		mv.setViewName("alipay/payfor_alipay");
 		return mv;
 	}
 	

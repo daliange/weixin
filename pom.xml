@@ -54,21 +54,6 @@
 			<artifactId>jetty-webapp</artifactId>
 			<version>${jetty-version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-jsp</artifactId>
-			<version>${jetty-version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.glassfish</groupId>
-					<artifactId>javax.el</artifactId>
-				</exclusion>
-				<exclusion>
-					<artifactId>javax.servlet.jsp.jstl</artifactId>
-					<groupId>org.eclipse.jetty.orbit</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
 
 
 		<dependency>
