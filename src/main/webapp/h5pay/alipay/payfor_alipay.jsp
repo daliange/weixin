@@ -1,4 +1,6 @@
-﻿<!doctype html>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 <html lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
@@ -31,6 +33,7 @@
 
 <div class="clear s_btn"><input name="" class="submit-btn" type="button" value="去支付" onclick = "order()"></div>
 
+
 <script src="/weixin/data/js/zepto.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="/weixin/data/js/base.js"></script>
 <script type="text/javascript" src="/weixin/data/js/service.js"></script>	
@@ -45,12 +48,13 @@
 function order(){
 	
 	alert(111);
-	//var charge ={tradeNO:"2017042821001004490265848542",payMode:"ali_pub"};
+    //alert("a="+a);
 	
-    var charge = {
-            payMode: "ali_pub",
-            params: {"tradeNO":"2017042821001004490265848542"}
-        };
+	//var charge = {"tradeNO":"2017050321001004490276168317","payMode":"ali_pub"};
+	
+    var charge = {payMode: "ali_pub", params: {"tradeNO":"2017050321001004490276168317"}};
+	
+	//var charge = {"payMode":"ali_pub","params":"{\"tradeNO\":\"2017050321001004490276168317\"}"};
 	
 	
 	      paymentjs.createPayment(charge, function(result, err) {
