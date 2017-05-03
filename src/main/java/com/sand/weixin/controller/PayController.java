@@ -38,6 +38,7 @@ public class PayController {
 			logger.info("进行支付宝授权");
 			return "/alipay/alitoken";
 		}else{
+			logger.info("error");
 			return "error";
 		}		
 	}
