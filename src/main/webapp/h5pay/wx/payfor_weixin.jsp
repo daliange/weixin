@@ -12,7 +12,7 @@
 	type="text/css">
 </head>
 
-<body class="body-bg" onload="upweixincode()">
+<body class="body-bg" >
 	<!--页头-->
 	<script language="javascript" src="/weixin/data/js/header.js"
 		id="headerScript"
