@@ -160,12 +160,8 @@ public class PayController {
 		
 		String credential ="";
 		try {
-			//外网测试
-			//GatewayOrderPayResponse gwPayResponse = SandpayClient.execute(gwOrderPayReq, "http://61.129.71.103:8003/gateway/api/order/pay");
-			//本地测试
+			/**生产环境下单**/
 			GatewayOrderPayResponse gwPayResponse = SandpayClient.execute(gwOrderPayReq, "https://cashier.sandpay.com.cn/gateway/api/order/pay");
-			//测试地址
-			//GatewayOrderPayResponse gwPayResponse = SandpayClient.execute(gwOrderPayReq, "http://172.28.250.242:8084/gateway/api/order/pay");
 			SandpayResponseHead respHead = gwPayResponse.getHead();
 			
 			if(SandpayConstants.SUCCESS_RESP_CODE.equals(respHead.getRespCode())) {
