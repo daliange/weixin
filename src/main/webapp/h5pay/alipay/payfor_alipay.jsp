@@ -59,16 +59,11 @@ function order(){
 	var userId = $("#userId").text();
     //alert("userId="+userId);
     
-    
-	
-	
-
-	
  	$.ajax({
         type: "post",
         async : false,
         url: "order.do",
-        data: {amt : $("#amount").val(),userId:userId},
+        data: {amt : $("#amount").val(),userId:userId,payMode:"sand_alipay"},
         success: function (credential) {
         	alert(credential);
         	

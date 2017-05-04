@@ -44,10 +44,10 @@
 		</ul>
 	</div>
 
-
+<!--调用下单方法，下单完成后，将trade_no传值给支付宝JS，起调支付宝收银台-->
 	<div class="clear s_btn">
 		<input name="" class="submit-btn" type="button" value="去支付"
-			onclick="onBridgeReady1()">
+			onclick="order()">
 	</div>
 
 	<script src="/weixin/data/js/zepto.min.js" type="text/javascript"></script>
@@ -69,11 +69,23 @@ $('#loginout').bind("click",function(){
 </script>
 
 	<script>
-function onBridgeReady1(){
+    
+function order(){
 	
-	alert(111);
-	   
- 	      var charge = {
+	//alert(111);
+	var userId = $("#userId").text();
+    //alert("userId="+userId);
+    
+ 	$.ajax({
+        type: "post",
+        async : false,
+        url: "order.do",
+        data: {amt : $("#amount").val(),userId:userId,payMode:"sand_alipay"},
+        success: function (credential) {
+        	alert(credential);
+        	
+        	
+        	var charge = {
  	    	        payMode: "wx_pub",
  	    	        params: {
  	    		           "appId":"wx5d4aa509b7a68610",     //公众号名称，由商户传入     
@@ -84,15 +96,24 @@ function onBridgeReady1(){
  	    		           "paySign":"8F9374CF21C40EDE186AA633637BC572" //微信签名 
  	    		           }
  	    	    }; 
- 	    	    
- 	    	    paymentjs.createPayment(charge, function(result, err) {
- 	    	        console.log(result);
- 	    	        console.log(err.msg);
- 	    	        console.log(err.extra);
- 	    	    });
- 	    	    
- 	    	    
-    }
+        	
+          //var charge = {"payMode": "ali_pub", "params": {"tradeNO":"2017050321001004490276745043"}};
+        //alert(charge);
+          //var a = {"tradeNO":"2017050321001004490276745043","payMode":"ali_pub"}
+        
+  	      paymentjs.createPayment(charge, function(result, err) {
+            console.log(result);
+            console.log(err.msg);
+            console.log(err.extra);
+        }); 
+        	
+        	
+      
+        }
+    }); 
+
+	
+}
     
     
 </script>
