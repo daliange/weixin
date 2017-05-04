@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSONObject;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
@@ -183,7 +184,8 @@ public class PayController {
 	
 	
 	@RequestMapping(value="wxReturn")
-	public String wxReturn(HttpServletRequest request,HttpServletResponse response) {
+	@ResponseBody
+	public ModelAndView wxReturn(HttpServletRequest request,HttpServletResponse response) {
 		
 		String code=request.getParameter("code");
 		String state=request.getParameter("state");
@@ -201,8 +203,17 @@ public class PayController {
 		
 		String ret=HttpUtils.doPost("https://api.weixin.qq.com/sns/oauth2/access_token", param);	
 		logger.info("向微信申请access_token返回 " +  ret);
+		JSONObject json = JSONObject.parseObject(ret);
+		String openid = (String)json.get("openid");
+		logger.info("openid返回 " +  openid);
 		
-		return "/wx/payfor_weixin";
+		request.setAttribute("userId", openid);
+		//String url = "h5pay/alipay/payfor_alipay.jsp";
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("userId", openid);
+		mv.setViewName("wx/payfor_weixin");
+		return mv;
 		
 	}
 	
