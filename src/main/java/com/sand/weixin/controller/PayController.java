@@ -1,6 +1,7 @@
 package com.sand.weixin.controller;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
@@ -33,6 +35,7 @@ import cn.com.sandpay.cashier.sdk.SandpayRequestHead;
 import cn.com.sandpay.cashier.sdk.SandpayResponseHead;
 import cn.com.sandpay.cashier.sdk.util.CertUtil;
 import cn.com.sandpay.cashier.sdk.util.DateUtil;
+import cn.com.sandpay.cashier.sdk.util.SDKUtil;
 
 
 
@@ -112,6 +115,7 @@ public class PayController {
 	public String order(HttpServletRequest request,HttpServletResponse response) {
 		String amt=request.getParameter("amt");
 		String userId=request.getParameter("userId");
+		String payMode = request.getParameter("payMode");
 		logger.info("amt="+amt);
 		logger.info("userId="+userId);
 		/**调用支付网关公众号下单方法**/
@@ -141,19 +145,29 @@ public class PayController {
 		head.setReqTime(DateUtil.getCurrentDate14());
 		
 		body.setOrderCode(DateUtil.getCurrentDate14());
-		body.setTotalAmount("000000000001");
+		body.setTotalAmount("000000000101");
 		body.setSubject("话费充值");
 		body.setBody("用户购买话费0.01");
 		//body.setTxnTimeOut("");
 		
-		//微信
-//		head.setProductId("00000005");
-//		body.setPayMode("sand_wx");
-//		body.setPayExtra("{\"subAppid\":\"wx94348ceda2791351\",\"userId\":\"oI3GMv9GE71n78RzCQcsp1RZIyZE\"}");
-		//支付宝
-		head.setProductId("00000006");
-		body.setPayMode("sand_alipay");
-		body.setPayExtra("{\"userId\":\""+userId+"\"}");
+		
+		if(payMode!=null && payMode.equals("sand_wx")){
+			//微信
+			head.setProductId("00000005");
+			body.setPayMode("sand_wx");
+			body.setPayExtra("{\"subAppid\":\"wx94348ceda2791351\",\"userId\":\""+userId+"\"}");
+
+//			head.setProductId("00000005");
+//			body.setPayMode("sand_wx");
+//			body.setPayExtra("{\"subAppid\":\"wx94348ceda2791351\",\"userId\":\"oI3GMv_boU4fi_qdQxHo8lW22bh8\"}");
+//			
+		}else if(payMode!=null && payMode.equals("sand_alipay")){
+			//支付宝
+			head.setProductId("00000006");
+			body.setPayMode("sand_alipay");
+			body.setPayExtra("{\"userId\":\""+userId+"\"}");
+		}
+		
 		
 		body.setClientIp("127.0.0.1");
 		body.setNotifyUrl("http://127.0.0.1/WebGateway/stateChangeServlet");
@@ -169,8 +183,13 @@ public class PayController {
 				logger.info("txn success.");
 				
 				GatewayOrderPayResponseBody respBody = gwPayResponse.getBody();
-				credential = respBody.getCredential();
-				logger.info("credential={}",credential);	
+		        Map map = JSONObject.parseObject(respBody.getCredential());
+		        Map params = JSONObject.parseObject(map.get("params").toString());
+		        map.put("params",params);
+		        credential = JSON.parseObject(map.toString()).toString();
+		        logger.info("credential={}",credential);
+
+				//JSON.parseObject(credential);
 				
 			} else {
 				logger.error("txn fail respCode[{}],respMsg[{}].", respHead.getRespCode(), respHead.getRespMsg());

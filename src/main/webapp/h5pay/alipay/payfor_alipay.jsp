@@ -67,7 +67,7 @@ function order(){
         success: function (credential) {
         	alert(credential);
         	
-          //var charge = {"payMode": "ali_pub", "params": {"tradeNO":"2017050321001004490276745043"}};
+        //  var charge = {"payMode": "ali_pub", "params": {"tradeNO":"2017050521001004490279615424"}};
         //alert(charge);
           //var a = {"tradeNO":"2017050321001004490276745043","payMode":"ali_pub"}
         

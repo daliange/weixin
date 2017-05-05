@@ -30,7 +30,7 @@
 			<li>
 				<div class="cell_per25 c_333 fl_left">支付金额</div>
 				<div class="cell_per70 fl_left pad_lr_10">
-					<input style="color: #ccc;" name="" type="text">
+					<input style="color: #ccc;" name="amount" id ="amount" type="text">
 				</div>
 			</li>
 			<li>
@@ -49,6 +49,16 @@
 		<input name="" class="submit-btn" type="button" value="去支付"
 			onclick="order()">
 	</div>
+	
+<div style="display: none" >
+
+	<%
+		String userId = (String)request.getAttribute("userId");
+	System.out.println("===" + userId);
+	
+	%> 
+	<p id="userId"><%=userId%></p>
+</div>
 
 	<script src="/weixin/data/js/zepto.min.js" type="text/javascript"></script>
 	<script type="text/javascript" src="/weixin/data/js/base.js"></script>
@@ -80,12 +90,12 @@ function order(){
         type: "post",
         async : false,
         url: "order.do",
-        data: {amt : $("#amount").val(),userId:userId,payMode:"sand_alipay"},
+        data: {amt : $("#amount").val(),userId:userId,payMode:"sand_wx"},
         success: function (credential) {
         	alert(credential);
         	
         	
-        	var charge = {
+/*          	var charge = {
  	    	        payMode: "wx_pub",
  	    	        params: {
  	    		           "appId":"wx5d4aa509b7a68610",     //公众号名称，由商户传入     
@@ -95,13 +105,13 @@ function order(){
  	    		           "signType":"MD5",         //微信签名方式：     
  	    		           "paySign":"8F9374CF21C40EDE186AA633637BC572" //微信签名 
  	    		           }
- 	    	    }; 
+ 	    	    };   */
         	
           //var charge = {"payMode": "ali_pub", "params": {"tradeNO":"2017050321001004490276745043"}};
         //alert(charge);
           //var a = {"tradeNO":"2017050321001004490276745043","payMode":"ali_pub"}
         
-  	      paymentjs.createPayment(charge, function(result, err) {
+  	      paymentjs.createPayment(credential, function(result, err) {
             console.log(result);
             console.log(err.msg);
             console.log(err.extra);
