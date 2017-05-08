@@ -6,11 +6,11 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
 	<title>H5收银台</title>
-	<link rel="stylesheet" href="/pay/data/css/sandbao_check_out.css" type="text/css">
+	<link rel="stylesheet" href="/h5pay/data/css/sandbao_check_out.css" type="text/css">
 </head>
 <body class="body-bg">
 <!--页头-->
-<script language="javascript" src="/pay/data/js/header.js" id="headerScript" data-args="headername=杉德宝收银台&nbsp; &headerbackurl=01_index.html"></script>
+<script language="javascript" src="/h5pay/data/js/header.js" id="headerScript" data-args="headername=杉德宝收银台&nbsp; &headerbackurl=01_index.html"></script>
 <!--页头 结束-->
 <div class="global-navb mar_top_10 clear">
     <div class="jy_failure">
@@ -19,9 +19,9 @@
     </div>
 </div>
 
-<script src="/pay/data/js/zepto.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="/pay/data/js/base.js"></script>
-<script type="text/javascript" src="/pay/data/js/service.js"></script>	
+<script src="/h5pay/data/js/zepto.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/h5pay/data/js/base.js"></script>
+<script type="text/javascript" src="/h5pay/data/js/service.js"></script>	
 <script>
 $('#loginout').bind("click",function(){
     var strCookie = document.cookie;
