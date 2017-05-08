@@ -16,6 +16,6 @@ function gotox(url){
 <!--http://cashie-test.sandpay.com.cn/h5pay/wx/payfor_weixin.html  -->
 
 <body
-	onload="gotox('https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx94348ceda2791351&redirect_uri=http://payment-test.sandpay.com.cn/weixin/wxReturn.do&response_type=code&scope=snsapi_base&state=mid-888002199990001')">
+	onload="gotox('https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx94348ceda2791351&redirect_uri=http://cashier.sandpay.com.cn/h5pay/wxReturn.do&response_type=code&scope=snsapi_base&state=mid-888002199990001')">
 </body>
 </html>
