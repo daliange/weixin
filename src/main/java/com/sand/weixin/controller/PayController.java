@@ -1,6 +1,7 @@
 package com.sand.weixin.controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,6 +29,7 @@ import com.sand.weixin.pojo.GatewayOrderPayRequest;
 import com.sand.weixin.pojo.GatewayOrderPayRequest.GatewayOrderPayRequestBody;
 import com.sand.weixin.pojo.GatewayOrderPayResponse;
 import com.sand.weixin.pojo.GatewayOrderPayResponse.GatewayOrderPayResponseBody;
+import com.sand.weixin.util.BigDecimalUtils;
 import com.sand.weixin.util.HttpUtils;
 
 import cn.com.sandpay.cashier.sdk.SandpayClient;
@@ -113,12 +115,13 @@ public class PayController {
 	@RequestMapping(value="order")
 	@ResponseBody
 	public String order(HttpServletRequest request,HttpServletResponse response) {
-		String amt=request.getParameter("amt");
+		BigDecimal amt=new BigDecimal(request.getParameter("amt"));
 		String userId=request.getParameter("userId");
 		String payMode = request.getParameter("payMode");
 		logger.info("amt="+amt);
 		logger.info("userId="+userId);
 		/**调用支付网关公众号下单方法**/
+		String payAmt = BigDecimalUtils.bigDecimalTo12AmtString(amt);
 		
 
 		// 加载证书
@@ -145,7 +148,8 @@ public class PayController {
 		head.setReqTime(DateUtil.getCurrentDate14());
 		
 		body.setOrderCode(DateUtil.getCurrentDate14());
-		body.setTotalAmount("000000000101");
+		
+		body.setTotalAmount(payAmt);
 		body.setSubject("话费充值");
 		body.setBody("用户购买话费0.01");
 		//body.setTxnTimeOut("");
