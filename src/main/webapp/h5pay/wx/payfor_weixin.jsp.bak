@@ -79,8 +79,13 @@ $('#loginout').bind("click",function(){
 </script>
 
 	<script>
+    
 function order(){
+	
+	//alert(111);
 	var userId = $("#userId").text();
+    //alert("userId="+userId);
+    
  	$.ajax({
         type: "post",
         async : false,
@@ -88,52 +93,37 @@ function order(){
         data: {amt : $("#amount").val(),userId:userId,payMode:"sand_wx"},
         success: function (credential) {
         	alert(credential);
+        	
+        	
+/*          	var charge = {
+ 	    	        payMode: "wx_pub",
+ 	    	        params: {
+ 	    		           "appId":"wx5d4aa509b7a68610",     //公众号名称，由商户传入     
+ 	    		           "timeStamp":"1492092770085",         //时间戳，自1970年以来的秒数     
+ 	    		           "nonceStr":"7b49a5d0226b4bb0a111a735368528be", //随机串     
+ 	    		           "package":"prepay_id=wx201704132212507cb46fe7f00453814588",     
+ 	    		           "signType":"MD5",         //微信签名方式：     
+ 	    		           "paySign":"8F9374CF21C40EDE186AA633637BC572" //微信签名 
+ 	    		           }
+ 	    	    };   */
+        	
+          //var charge = {"payMode": "ali_pub", "params": {"tradeNO":"2017050321001004490276745043"}};
+        //alert(charge);
+          //var a = {"tradeNO":"2017050321001004490276745043","payMode":"ali_pub"}
+        
   	      paymentjs.createPayment(credential, function(result, err) {
             console.log(result);
             console.log(err.msg);
             console.log(err.extra);
         }); 
+        	
+        	
+      
         }
     }); 
+
+	
 }
-	
-	/**微信官方起调
-	function order(){
-		
-		WeixinJSBridge.invoke(
-			       'getBrandWCPayRequest', {
-			           "appId":"wx5d4aa509b7a68610",     //公众号名称，由商户传入     
-			           "timeStamp":"1505790006",         //时间戳，自1970年以来的秒数     
-			           "nonceStr":"7162b2e9c5c34c429dbb519323c493f9", //随机串     
-			           "package":"prepay_id=wx20170919110006db85faeff50894684856",     
-			           "signType":"MD5",         //微信签名方式：     
-			           "paySign":"1339429EED3966437C8E52F4C249261C" //微信签名 
-			       },
-			       function(res){     
-			           if(res.err_msg == "get_brand_wcpay_request:ok" ) {}     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。 
-			       }
-			   ); 
-	}
-	**/
-	
-	/**
-	function order(){
-		
-		WeixinJSBridge.invoke(
-			       'getBrandWCPayRequest', {
-			           "appId":"wxa8d0b58cefc18eb2",     //公众号名称，由商户传入     
-			           "timeStamp":"1505790938",         //时间戳，自1970年以来的秒数     
-			           "nonceStr":"x5g9rSl2GHJwJrnTsyTpoznEsqu9rNqY", //随机串     
-			           "package":"prepay_id=wx201709191115380a2b3780140235656222",     
-			           "signType":"MD5",         //微信签名方式：     
-			           "paySign":"1F4DAFE135C296F29486584C79005A9F" //微信签名 
-			       },
-			       function(res){     
-			           if(res.err_msg == "get_brand_wcpay_request:ok" ) {}     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。 
-			       }
-			   ); 
-	}
-	**/
     
     
 </script>
