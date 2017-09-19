@@ -117,6 +117,7 @@ public class PayController {
 	public String order(HttpServletRequest request,HttpServletResponse response) {
 		BigDecimal amt=new BigDecimal(request.getParameter("amt"));
 		String userId=request.getParameter("userId");
+		userId = "oI3GMv_boU4fi_qdQxHo8lW22bh8";
 		String payMode = request.getParameter("payMode");
 		logger.info("amt="+amt);
 		logger.info("userId="+userId);
@@ -231,6 +232,8 @@ public class PayController {
 		logger.info("openid返回 " +  openid);
 		
 		request.setAttribute("userId", openid);
+		//默认openid
+		request.setAttribute("userId", "oI3GMv_boU4fi_qdQxHo8lW22bh8");
 		//String url = "h5pay/alipay/payfor_alipay.jsp";
 		
 		ModelAndView mv = new ModelAndView();
