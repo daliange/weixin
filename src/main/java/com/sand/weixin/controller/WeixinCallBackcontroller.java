@@ -24,7 +24,7 @@ public class WeixinCallBackcontroller {
 	public String openPay(HttpServletRequest request,HttpServletResponse response) {	
 		String code=request.getParameter("code");
 		String state=request.getParameter("state");
-		logger.info("微信返回[code:"+code +  " state:"+state+" ]");
+		logger.info("微信返回code:"+code +  " state:"+state+" ");
 		
 		Map<String, Object> param=new HashMap<String, Object>();
 		param.put("appid", "wx94348ceda2791351");
