@@ -117,7 +117,7 @@ public class PayController {
 	public String order(HttpServletRequest request,HttpServletResponse response) {
 		BigDecimal amt=new BigDecimal(request.getParameter("amt"));
 		String userId=request.getParameter("userId");
-		userId = "oI3GMv_boU4fi_qdQxHo8lW22bh8";
+		//userId = "oI3GMv_boU4fi_qdQxHo8lW22bh8";
 		String payMode = request.getParameter("payMode");
 		logger.info("amt="+amt);
 		logger.info("userId="+userId);
