@@ -145,11 +145,11 @@ public class PayController {
 		head.setMethod("sandpay.trade.pay");
 		head.setAccessType("1");
 		//测试环境
-		head.setMid("14259580");
+		//head.setMid("14259580");
 		//生产环境
 		//head.setMid("100211701160001");
 		//生产环境
-		//head.setMid("16640704");
+		head.setMid("16640704");
 		head.setChannelType("07");
 		head.setReqTime(DateUtil.getCurrentDate14());
 		
@@ -188,9 +188,9 @@ public class PayController {
 			//本地测试环境下单
 			//GatewayOrderPayResponse gwPayResponse = SandpayClient.execute(gwOrderPayReq, "http://127.0.0.1:8080/pay-client/gateway/api/order/pay");
 			//sandtest测试环境下单
-			GatewayOrderPayResponse gwPayResponse = SandpayClient.execute(gwOrderPayReq, "http://172.28.250.242:8013/gateway/api/order/pay");
+			//GatewayOrderPayResponse gwPayResponse = SandpayClient.execute(gwOrderPayReq, "http://172.28.250.242:8013/gateway/api/order/pay");
 			//生产环境下单
-			//GatewayOrderPayResponse gwPayResponse = SandpayClient.execute(gwOrderPayReq, "https://cashier.sandpay.com.cn/gateway/api/order/pay");
+			GatewayOrderPayResponse gwPayResponse = SandpayClient.execute(gwOrderPayReq, "https://cashier.sandpay.com.cn/gateway/api/order/pay");
 			SandpayResponseHead respHead = gwPayResponse.getHead();
 			
 			if(SandpayConstants.SUCCESS_RESP_CODE.equals(respHead.getRespCode())) {
